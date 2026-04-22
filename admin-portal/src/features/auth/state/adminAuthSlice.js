@@ -26,11 +26,22 @@ export const getAdminMe = createAsyncThunk('auth/getAdminMe', async (_, thunkAPI
   }
 });
 
+// Admin Logout Thunk
+export const adminLogout = createAsyncThunk('auth/adminLogout', async (_, thunkAPI) => {
+  try {
+    await axios.post(`${API_URL}/logout`, {}, { withCredentials: true });
+    localStorage.removeItem('adminUser');
+    return { success: true };
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data?.message || 'Logout failed');
+  }
+});
+
 const adminAuthSlice = createSlice({
   name: 'adminAuth',
   initialState: {
     user: JSON.parse(localStorage.getItem('adminUser')) || null,
-    isLoading: false,
+    isLoading: !!localStorage.getItem('adminUser'),
     isSuccess: false,
     isError: false,
     message: '',
@@ -65,12 +76,23 @@ const adminAuthSlice = createSlice({
         state.message = action.payload;
         state.user = null;
       })
+      .addCase(getAdminMe.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(getAdminMe.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.user = action.payload.user;
       })
       .addCase(getAdminMe.rejected, (state) => {
+        state.isLoading = false;
         state.user = null;
         localStorage.removeItem('adminUser');
+      })
+      .addCase(adminLogout.fulfilled, (state) => {
+        state.user = null;
+        state.isSuccess = false;
+        state.isError = false;
+        state.message = '';
       });
   },
 });

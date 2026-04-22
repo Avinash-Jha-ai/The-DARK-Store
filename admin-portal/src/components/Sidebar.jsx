@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Package, ShoppingCart, LogOut, Plus } from 'lucide-react';
 import { useDispatch } from 'react-redux';
-import { logout } from '../features/auth/state/adminAuthSlice';
+import { adminLogout } from '../features/auth/state/adminAuthSlice';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const Sidebar = () => {
   ];
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(adminLogout());
   };
 
   return (

@@ -12,7 +12,7 @@ const AdminLoginPage = () => {
   const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.adminAuth);
 
   useEffect(() => {
-    if (isSuccess || user) {
+    if (isSuccess || (user && user.role === 'admin')) {
       navigate('/');
     }
     return () => {

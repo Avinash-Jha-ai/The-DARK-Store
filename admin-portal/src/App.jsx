@@ -11,12 +11,20 @@ import { Navigate } from 'react-router-dom';
 import './styles/admin-global.css';
 
 function App() {
-  const { user } = useSelector((state) => state.adminAuth);
+  const { user, isLoading } = useSelector((state) => state.adminAuth);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(getAdminMe());
   }, [dispatch]);
+
+  if (isLoading) {
+    return (
+      <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f6f7' }}>
+        <p style={{ letterSpacing: '0.2em', fontWeight: '700' }}>LOADING SECURE ACCESS...</p>
+      </div>
+    );
+  }
 
   return (
     <Router>
@@ -25,7 +33,7 @@ function App() {
         <Route
           path="/*"
           element={
-            user ? (
+            user && user.role === 'admin' ? (
               <div className="admin-layout" style={{ display: 'flex' }}>
                 <Sidebar />
                 <Routes>
