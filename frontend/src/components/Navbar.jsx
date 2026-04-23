@@ -16,7 +16,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();
-  
+
   const [isSearchOpen, setIsSearchOpen] = useState(!!searchParams.get('q'));
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
   const [isKartOpen, setIsKartOpen] = useState(false);
@@ -173,7 +173,7 @@ const Navbar = () => {
               <Heart size={20} />
             </Link>
           )}
-          
+
           <div style={{ position: 'relative', cursor: 'pointer' }} onClick={() => setIsKartOpen(true)}>
             <ShoppingBag size={20} />
             {cartItemsCount > 0 && (
