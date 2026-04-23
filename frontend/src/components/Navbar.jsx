@@ -103,7 +103,7 @@ const Navbar = () => {
           The DARK Store
         </Link>
 
-        <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+        <div className="nav-icons" style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
           <AnimatePresence>
             {isSearchOpen ? (
               <motion.div
@@ -208,6 +208,12 @@ const Navbar = () => {
             nav { padding: 16px 20px !important; }
             .logo-text { font-size: 1.2rem !important; letter-spacing: 0.1em !important; }
             .user-name { display: none !important; }
+            .nav-icons { gap: 16px !important; }
+          }
+          @media (max-width: 480px) {
+            nav { padding: 16px 12px !important; }
+            .nav-icons { gap: 12px !important; }
+            .logo-text { font-size: 1rem !important; }
           }
         `}</style>
       </motion.nav>

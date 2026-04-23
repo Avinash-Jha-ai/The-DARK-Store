@@ -61,6 +61,7 @@ const ProductCard = ({ product, showHoverImage = false, index = 0, height = '480
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       whileHover={{ y: -10 }}
+      className="product-card-wrapper"
     >
       <div style={{ 
           height: height, 
@@ -68,7 +69,7 @@ const ProductCard = ({ product, showHoverImage = false, index = 0, height = '480
           marginBottom: '24px', 
           backgroundColor: '#f5f5f5', 
           position: 'relative' 
-      }}>
+      }} className="product-image-container">
         {/* Main Image */}
         <img 
           src={mainImage} 
@@ -108,6 +109,7 @@ const ProductCard = ({ product, showHoverImage = false, index = 0, height = '480
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
           transition={{ duration: 0.3 }}
+          className="add-to-kart-overlay"
           style={{
             position: 'absolute',
             bottom: '20px',
@@ -206,6 +208,13 @@ const ProductCard = ({ product, showHoverImage = false, index = 0, height = '480
       }}>
         ₹{product.price}
       </p>
+      <style>{`
+        @media (max-width: 640px) {
+          .product-image-container { height: 350px !important; }
+          .add-to-kart-overlay { opacity: 1 !important; transform: none !important; bottom: 10px !important; left: 10px !important; right: 10px !important; }
+          .add-to-kart-overlay button { padding: 8px !important; font-size: 0.6rem !important; }
+        }
+      `}</style>
     </motion.div>
   );
 };

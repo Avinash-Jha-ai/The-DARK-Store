@@ -68,13 +68,13 @@ const AddProductPage = () => {
   };
 
   return (
-    <div className="main-content" style={{ padding: '40px', maxWidth: '1000px' }}>
+    <div className="main-content" style={{ padding: '40px', maxWidth: '1000px', margin: '0 auto' }}>
       <header style={{ marginBottom: '40px' }}>
         <h1 style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--color-on-background)' }}>Launch New Product</h1>
         <p style={{ color: 'var(--color-text-secondary)' }}>Add a new piece to the official The DARK Store collection.</p>
       </header>
 
-      <form onSubmit={onSubmit} style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '40px' }}>
+      <form onSubmit={onSubmit} className="add-product-form" style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '40px' }}>
         
         {/* Left: Basic Info */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
@@ -230,6 +230,13 @@ const AddProductPage = () => {
         </div>
 
       </form>
+      <style>{`
+        @media (max-width: 900px) {
+          .add-product-form { grid-template-columns: 1fr !important; }
+          .main-content { padding: 20px !important; }
+        }
+      `}</style>
+    </div>
     </div>
   );
 };

@@ -40,7 +40,7 @@ const HomePage = () => {
       <CollectionBar />
       
       {/* Hero Section */}
-      <section style={{ height: '80vh', position: 'relative', overflow: 'hidden' }}>
+      <section className="hero-section" style={{ height: '80vh', position: 'relative', overflow: 'hidden' }}>
         <motion.div 
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -197,8 +197,8 @@ const HomePage = () => {
           .editorial-title { font-size: 2.5rem !important; }
         }
         @media (max-width: 768px) {
-          .hero-title { font-size: 2.5rem !important; }
-          .editorial-section { flex-direction: column !important; gap: 40px !important; }
+          .hero-section { display: none !important; }
+          .editorial-section { flex-direction: column !important; gap: 40px !important; padding: 60px 0 !important; }
           .editorial-image { height: 400px !important; }
           .section-title { font-size: 2rem !important; }
         }
