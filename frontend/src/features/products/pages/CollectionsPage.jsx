@@ -58,7 +58,7 @@ const CollectionsPage = () => {
       <Navbar />
       <CollectionBar />
 
-      <section style={{ padding: '80px 60px 40px' }}>
+      <section className="container" style={{ padding: '80px 0 40px' }}>
         <motion.div
            initial={{ opacity: 0, y: 20 }}
            animate={{ opacity: 1, y: 0 }}
@@ -72,7 +72,7 @@ const CollectionsPage = () => {
             fontWeight: '300',
             marginBottom: '16px',
             lineHeight: '1'
-          }}>
+          }} className="collections-title">
             Our Collections
           </h1>
           <div style={{ width: '60px', height: '2px', backgroundColor: 'var(--color-gold)', marginBottom: '24px' }}></div>
@@ -82,12 +82,12 @@ const CollectionsPage = () => {
         </motion.div>
       </section>
 
-      <section style={{ padding: '40px 60px 100px' }}>
+      <section className="container" style={{ padding: '40px 0 100px' }}>
         <div style={{ 
             display: 'grid', 
             gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', 
             gap: '40px' 
-        }}>
+        }} className="collections-grid">
           {collectionsList.map((collection, index) => (
             <motion.div
               key={collection.id}
@@ -102,17 +102,18 @@ const CollectionsPage = () => {
                   height: '500px',
                   overflow: 'hidden'
               }}
+              className="collection-card"
               onMouseEnter={(e) => {
                   const img = e.currentTarget.querySelector('img');
                   const overlay = e.currentTarget.querySelector('.overlay');
-                  img.style.transform = 'scale(1.05)';
-                  overlay.style.backgroundColor = 'rgba(0,0,0,0.3)';
+                  if (img) img.style.transform = 'scale(1.05)';
+                  if (overlay) overlay.style.backgroundColor = 'rgba(0,0,0,0.3)';
               }}
               onMouseLeave={(e) => {
                   const img = e.currentTarget.querySelector('img');
                   const overlay = e.currentTarget.querySelector('.overlay');
-                  img.style.transform = 'scale(1)';
-                  overlay.style.backgroundColor = 'rgba(0,0,0,0.2)';
+                  if (img) img.style.transform = 'scale(1)';
+                  if (overlay) overlay.style.backgroundColor = 'rgba(0,0,0,0.2)';
               }}
             >
               <img 
@@ -161,6 +162,14 @@ const CollectionsPage = () => {
           ))}
         </div>
       </section>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .collections-title { font-size: 2.5rem !important; }
+          .collections-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+          .collection-card { height: 400px !important; }
+        }
+      `}</style>
 
       <Footer />
     </div>

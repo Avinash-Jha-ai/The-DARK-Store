@@ -26,15 +26,15 @@ const WishlistPage = () => {
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar />
       
-      <main style={{ flex: 1, padding: '120px 60px' }}>
+      <main className="container" style={{ flex: 1, padding: '120px 0' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '60px' }}>
+          <div className="wishlist-header" style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '60px' }}>
             <Heart size={32} fill="black" />
-            <h1 style={{ fontSize: '3rem', letterSpacing: '-0.02em' }}>Your Wishlist</h1>
+            <h1 className="wishlist-title" style={{ fontSize: '3rem', letterSpacing: '-0.02em' }}>Your Wishlist</h1>
           </div>
 
           {isLoading ? (
@@ -46,7 +46,7 @@ const WishlistPage = () => {
               />
             </div>
           ) : wishlistItems.length > 0 ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '40px' }}>
+            <div className="grid-responsive">
               {wishlistItems.map((product, index) => (
                 <ProductCard 
                   key={product._id || product.id} 
@@ -81,6 +81,13 @@ const WishlistPage = () => {
           )}
         </motion.div>
       </main>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .wishlist-header { flex-direction: column; align-items: flex-start !important; gap: 8px !important; margin-bottom: 40px !important; }
+          .wishlist-title { font-size: 2.2rem !important; }
+        }
+      `}</style>
 
       <Footer />
       

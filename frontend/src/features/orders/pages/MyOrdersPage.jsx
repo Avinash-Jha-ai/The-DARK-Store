@@ -43,16 +43,16 @@ const MyOrdersPage = () => {
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar />
       
-      <main style={{ flex: 1, padding: '120px 60px', backgroundColor: '#f9f9f9' }}>
+      <main className="container" style={{ flex: 1, padding: '120px 0', backgroundColor: '#f9f9f9' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '60px' }}>
+            <div className="orders-header" style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '60px' }}>
               <Package size={32} />
-              <h1 style={{ fontSize: '3rem', letterSpacing: '-0.02em' }}>My Orders</h1>
+              <h1 className="orders-title" style={{ fontSize: '3rem', letterSpacing: '-0.02em' }}>My Orders</h1>
             </div>
 
             {isLoading ? (
@@ -76,25 +76,26 @@ const MyOrdersPage = () => {
                       flexDirection: 'column',
                       gap: '24px'
                     }}
+                    className="order-card"
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid #f0f0f0', paddingBottom: '20px' }}>
+                    <div className="order-card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid #f0f0f0', paddingBottom: '20px', flexWrap: 'wrap', gap: '20px' }}>
                       <div>
-                        <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', letterSpacing: '0.1em', marginBottom: '4px' }}>ORDER NUMBER</p>
-                        <p style={{ fontWeight: '700', fontSize: '0.9rem' }}>#{order._id.substring(order._id.length - 8).toUpperCase()}</p>
+                        <p style={{ fontSize: '0.7rem', color: 'var(--color-text-secondary)', letterSpacing: '0.1em', marginBottom: '4px' }}>ORDER NUMBER</p>
+                        <p style={{ fontWeight: '700', fontSize: '0.85rem' }}>#{order._id.substring(order._id.length - 8).toUpperCase()}</p>
                       </div>
                       <div>
-                        <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', letterSpacing: '0.1em', marginBottom: '4px' }}>DATE PLACED</p>
-                        <p style={{ fontWeight: '600', fontSize: '0.9rem' }}>{formatDate(order.createdAt)}</p>
+                        <p style={{ fontSize: '0.7rem', color: 'var(--color-text-secondary)', letterSpacing: '0.1em', marginBottom: '4px' }}>DATE PLACED</p>
+                        <p style={{ fontWeight: '600', fontSize: '0.85rem' }}>{formatDate(order.createdAt)}</p>
                       </div>
                       <div>
-                        <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', letterSpacing: '0.1em', marginBottom: '4px' }}>TOTAL AMOUNT</p>
-                        <p style={{ fontWeight: '700', fontSize: '1rem', color: 'var(--color-gold)' }}>₹{order.totalAmount}</p>
+                        <p style={{ fontSize: '0.7rem', color: 'var(--color-text-secondary)', letterSpacing: '0.1em', marginBottom: '4px' }}>TOTAL AMOUNT</p>
+                        <p style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--color-gold)' }}>₹{order.totalAmount}</p>
                       </div>
                       <div style={{
                         padding: '6px 12px',
                         backgroundColor: `${getStatusColor(order.orderStatus)}15`,
                         color: getStatusColor(order.orderStatus),
-                        fontSize: '0.7rem',
+                        fontSize: '0.65rem',
                         fontWeight: '700',
                         letterSpacing: '0.1em'
                       }}>
@@ -108,13 +109,13 @@ const MyOrdersPage = () => {
                           <img 
                             src={item.product?.images?.[0]?.url || 'https://via.placeholder.com/100'} 
                             alt={item.product?.title} 
-                            style={{ width: '80px', height: '100px', objectFit: 'cover', backgroundColor: '#f5f5f5' }}
+                            style={{ width: '60px', height: '80px', objectFit: 'cover', backgroundColor: '#f5f5f5' }}
                           />
                           <div style={{ flex: 1 }}>
-                            <h4 style={{ fontSize: '0.9rem', fontWeight: '600', marginBottom: '4px' }}>{item.product?.title}</h4>
-                            <p style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>Quantity: {item.quantity}</p>
+                            <h4 style={{ fontSize: '0.85rem', fontWeight: '600', marginBottom: '4px' }}>{item.product?.title}</h4>
+                            <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Qty: {item.quantity}</p>
                           </div>
-                          <p style={{ fontWeight: '600' }}>₹{item.price}</p>
+                          <p style={{ fontWeight: '600', fontSize: '0.9rem' }}>₹{item.price}</p>
                         </div>
                       ))}
                     </div>
@@ -150,12 +151,11 @@ const MyOrdersPage = () => {
       <Footer />
       
       <style>{`
-        @media (max-width: 1024px) {
-          main { padding: 80px 24px !important; }
-          h1 { fontSize: 2.2rem !important; }
-        }
         @media (max-width: 768px) {
-          .order-header { flex-direction: column; gap: 16px; }
+          .orders-header { flex-direction: column; align-items: flex-start !important; gap: 8px !important; margin-bottom: 40px !important; }
+          .orders-title { font-size: 2.2rem !important; }
+          .order-card { padding: 20px !important; }
+          .order-card-header { flex-direction: column; gap: 12px !important; }
         }
       `}</style>
     </div>

@@ -27,14 +27,14 @@ const SearchPage = () => {
       <Navbar />
       <CollectionBar />
 
-      <section style={{ padding: '40px 60px 20px' }}>
+      <section className="container" style={{ padding: '40px 0 20px' }}>
         <h1 style={{ 
           fontSize: '2rem', 
           fontFamily: 'var(--font-headline)', 
           letterSpacing: '0.05em',
           marginBottom: '10px',
           textTransform: 'uppercase'
-        }}>
+        }} className="search-title">
           {query ? (
             <>Search results for: <span style={{ color: 'var(--color-gold)' }}>"{query}"</span></>
           ) : (
@@ -46,8 +46,8 @@ const SearchPage = () => {
         </p>
       </section>
 
-      <section style={{ padding: '40px 60px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '40px' }}>
+      <section className="container" style={{ padding: '40px 0' }}>
+        <div className="grid-responsive">
           {products && products.length > 0 ? (
             products.map((product, index) => (
               <ProductCard 
@@ -69,6 +69,12 @@ const SearchPage = () => {
           )}
         </div>
       </section>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .search-title { font-size: 1.5rem !important; }
+        }
+      `}</style>
 
       {isLoading && (
         <div style={{ textAlign: 'center', padding: '50px' }}>
