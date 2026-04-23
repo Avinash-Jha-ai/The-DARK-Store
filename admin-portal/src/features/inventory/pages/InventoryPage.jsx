@@ -22,7 +22,7 @@ const InventoryPage = () => {
 
   return (
     <div className="main-content">
-      <header style={{ marginBottom: '40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <header className="inventory-header" style={{ marginBottom: '40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
           <h1 style={{ fontSize: '2rem', marginBottom: '8px' }}>Inventory</h1>
           <p style={{ color: 'var(--admin-text-muted)' }}>Manage and track your official store listings.</p>
@@ -33,8 +33,8 @@ const InventoryPage = () => {
       </header>
 
       {/* Filters & Search */}
-      <div className="card" style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', padding: '16px 24px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: '#f8fafc', padding: '8px 16px', borderRadius: '4px', width: '300px' }}>
+      <div className="card inventory-filters" style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', padding: '16px 24px', gap: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: '#f8fafc', padding: '8px 16px', borderRadius: '4px', width: '100%', maxWidth: '300px' }}>
           <Search size={18} color="#64748b" />
           <input type="text" placeholder="Search inventory..." style={{ border: 'none', background: 'transparent', outline: 'none', width: '100%' }} />
         </div>
@@ -46,8 +46,8 @@ const InventoryPage = () => {
       </div>
 
       {/* Product Table */}
-      <div className="card" style={{ padding: '0', overflow: 'hidden' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+      <div className="card" style={{ padding: '0', overflowX: 'auto' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '800px' }}>
           <thead>
             <tr style={{ backgroundColor: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
               <th style={thStyle}>PRODUCT</th>
@@ -108,6 +108,13 @@ const InventoryPage = () => {
           </tbody>
         </table>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .inventory-header { flex-direction: column; align-items: flex-start !important; gap: 20px; }
+          .inventory-filters { flex-direction: column; align-items: flex-start !important; }
+          .inventory-filters > div { width: 100% !important; max-width: none !important; }
+        }
+      `}</style>
     </div>
   );
 };

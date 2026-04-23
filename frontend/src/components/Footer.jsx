@@ -5,16 +5,17 @@ const Footer = () => {
   return (
     <footer style={{ 
       backgroundColor: 'var(--color-surface-container)', 
-      padding: '80px 60px 40px', 
-      borderTop: '1px solid rgba(0,0,0,0.05)' 
+      padding: '80px 0 0', 
+      borderTop: '1px solid rgba(0,0,0,0.05)',
+      overflow: 'hidden'
     }}>
-      <div style={{ 
+      <div className="container" style={{ 
         display: 'grid', 
         gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
         gap: '40px',
         marginBottom: '60px'
       }}>
-        <div style={{ gridColumn: 'span 2' }}>
+        <div className="footer-brand" style={{ gridColumn: 'span 2' }}>
           <h2 style={{ fontSize: '1.5rem', marginBottom: '24px', letterSpacing: '0.2em' }}>The DARK Store</h2>
           <p style={{ color: 'var(--color-text-secondary)', maxWidth: '300px', fontSize: '0.9rem' }}>
             A global destination for luxury fashion, curated with an eye for detail and a soul for sustainability.
@@ -47,12 +48,15 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div style={{ 
+      <div className="container" style={{ 
         borderTop: '1px solid rgba(0,0,0,0.05)', 
         paddingTop: '40px', 
+        paddingBottom: '40px',
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '20px',
         fontSize: '0.75rem',
         color: 'var(--color-text-secondary)',
         letterSpacing: '0.05em'
@@ -66,14 +70,19 @@ const Footer = () => {
       <div style={{ 
         backgroundColor: 'black', 
         color: 'white', 
-        padding: '24px 60px', 
-        margin: '60px -60px -40px', 
+        padding: '24px 20px', 
         textAlign: 'center', 
         fontSize: '0.7rem', 
         letterSpacing: '0.2em' 
       }}>
         HANDCRAFTED WITH ❤️ BY The DARK Store DIGITAL
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .footer-brand { grid-column: span 1 !important; }
+          footer { padding-top: 60px !important; }
+        }
+      `}</style>
     </footer>
   );
 };

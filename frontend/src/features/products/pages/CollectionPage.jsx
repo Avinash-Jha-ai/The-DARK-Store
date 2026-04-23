@@ -26,14 +26,14 @@ const CollectionPage = () => {
       <Navbar />
       <CollectionBar />
 
-      <section style={{ padding: '40px 60px 20px' }}>
+      <section className="container" style={{ padding: '40px 0 20px' }}>
         <h1 style={{ 
           fontSize: '2.5rem', 
           fontFamily: 'var(--font-headline)', 
           letterSpacing: '0.1em',
           marginBottom: '10px',
           textTransform: 'uppercase'
-        }}>
+        }} className="collection-title">
           {collectionName.replace('-', ' ')} <span style={{ color: 'var(--color-gold)' }}>Collection</span>
         </h1>
         <p style={{ color: '#666', fontSize: '0.9rem', letterSpacing: '0.1em' }}>
@@ -41,8 +41,8 @@ const CollectionPage = () => {
         </p>
       </section>
 
-      <section style={{ padding: '40px 60px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '40px' }}>
+      <section className="container" style={{ padding: '40px 0' }}>
+        <div className="grid-responsive">
           {products && products.length > 0 ? (
             products.map((product, index) => (
               <ProductCard 
@@ -64,6 +64,12 @@ const CollectionPage = () => {
           )}
         </div>
       </section>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .collection-title { font-size: 1.8rem !important; }
+        }
+      `}</style>
 
       {isLoading && (
         <div style={{ textAlign: 'center', padding: '50px' }}>

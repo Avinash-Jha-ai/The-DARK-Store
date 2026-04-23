@@ -88,19 +88,19 @@ const ProductDetailPage = () => {
     <div style={{ backgroundColor: 'var(--color-surface-container-lowest)', minHeight: '100vh' }}>
       <Navbar />
       
-      <main style={{ padding: '140px 60px 100px', maxWidth: '1400px', margin: '0 auto' }}>
+      <main className="container" style={{ padding: '140px 0 100px' }}>
         {/* Breadcrumbs */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: 'var(--color-text-secondary)', marginBottom: '40px', letterSpacing: '0.05em' }}>
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.7rem', color: 'var(--color-text-secondary)', marginBottom: '32px', letterSpacing: '0.05em' }}>
           <Link to="/" style={{ color: 'inherit' }}>SHOP</Link>
-          <ChevronRight size={14} />
+          <ChevronRight size={12} />
           <span style={{ color: 'var(--color-gold)', fontWeight: '600' }}>{product.title.toUpperCase()}</span>
         </nav>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.2fr) minmax(0, 1fr)', gap: '80px' }}>
+        <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.2fr) minmax(0, 1fr)', gap: '80px' }}>
           
           {/* Product Images */}
-          <div style={{ display: 'flex', gap: '20px' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div className="image-gallery" style={{ display: 'flex', gap: '20px' }}>
+            <div className="thumbnails desktop-only" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {product.images?.map((img, idx) => (
                 <div 
                   key={idx}
@@ -117,7 +117,7 @@ const ProductDetailPage = () => {
                 </div>
               ))}
             </div>
-            <div style={{ flex: 1, height: '800px', backgroundColor: '#f9f9f9', overflow: 'hidden' }}>
+            <div className="main-image-container" style={{ flex: 1, height: '700px', backgroundColor: '#f9f9f9', overflow: 'hidden' }}>
               <AnimatePresence mode="wait">
                 <motion.img 
                   key={selectedImage}
@@ -130,19 +130,37 @@ const ProductDetailPage = () => {
                 />
               </AnimatePresence>
             </div>
+            {/* Mobile Thumbnails */}
+            <div className="thumbnails-mobile mobile-only" style={{ display: 'flex', gap: '8px', marginTop: '12px', overflowX: 'auto', paddingBottom: '8px' }}>
+              {product.images?.map((img, idx) => (
+                <div 
+                  key={idx}
+                  onClick={() => setSelectedImage(idx)}
+                  style={{ 
+                    width: '60px', 
+                    height: '80px', 
+                    flexShrink: 0,
+                    cursor: 'pointer', 
+                    border: selectedImage === idx ? '1px solid var(--color-gold)' : '1px solid transparent',
+                  }}
+                >
+                  <img src={img.url} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Product Info */}
-          <div style={{ position: 'sticky', top: '140px', height: 'fit-content' }}>
+          <div className="product-info-container" style={{ height: 'fit-content' }}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 style={{ fontSize: '3rem', fontWeight: '500', marginBottom: '16px', letterSpacing: '-0.02em', lineHeight: '1.1' }}>
+              <h1 className="product-title" style={{ fontSize: '3rem', fontWeight: '500', marginBottom: '16px', letterSpacing: '-0.02em', lineHeight: '1.1' }}>
                 {product.title}
               </h1>
-              <p style={{ fontSize: '1.8rem', fontWeight: '700', marginBottom: '32px', color: 'var(--color-on-background)' }}>
+              <p className="product-price" style={{ fontSize: '1.8rem', fontWeight: '700', marginBottom: '32px', color: 'var(--color-on-background)' }}>
                 ₹{product.price?.toLocaleString()}
               </p>
 
@@ -164,8 +182,8 @@ const ProductDetailPage = () => {
                           setSizeError(false);
                         }}
                         style={{
-                          width: '60px',
-                          height: '50px',
+                          width: '56px',
+                          height: '48px',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -199,12 +217,12 @@ const ProductDetailPage = () => {
                   onClick={handleAddToCart}
                   style={{
                     flex: 1,
-                    padding: '20px',
+                    padding: '18px',
                     backgroundColor: addedToCart ? '#10b981' : 'var(--color-on-background)',
                     color: 'white',
                     border: 'none',
                     fontWeight: '700',
-                    fontSize: '1rem',
+                    fontSize: '0.9rem',
                     letterSpacing: '0.1em',
                     display: 'flex',
                     alignItems: 'center',
@@ -214,15 +232,15 @@ const ProductDetailPage = () => {
                     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
                   }}
                 >
-                  {addedToCart ? <Check size={20} /> : <ShoppingBag size={20} />}
-                  {addedToCart ? 'ADDED TO KART' : 'ADD TO KART'}
+                  {addedToCart ? <Check size={18} /> : <ShoppingBag size={18} />}
+                  {addedToCart ? 'ADDED' : 'ADD TO KART'}
                 </button>
                 <WishlistButton 
                   productId={id} 
                   style={{ 
                     borderRadius: '0', 
-                    width: '64px', 
-                    height: '64px', 
+                    width: '60px', 
+                    height: '60px', 
                     border: '1px solid #eee',
                     boxShadow: 'none'
                   }} 
@@ -230,11 +248,11 @@ const ProductDetailPage = () => {
               </div>
 
               <div style={{ borderTop: '1px solid #eee', paddingTop: '32px' }}>
-                <h3 style={{ fontSize: '0.85rem', fontWeight: '600', letterSpacing: '0.1em', marginBottom: '16px' }}>DESCRIPTION</h3>
-                <p style={{ lineHeight: '1.8', color: 'var(--color-text-secondary)', marginBottom: '24px' }}>
+                <h3 style={{ fontSize: '0.8rem', fontWeight: '600', letterSpacing: '0.1em', marginBottom: '16px' }}>DESCRIPTION</h3>
+                <p style={{ lineHeight: '1.6', color: 'var(--color-text-secondary)', marginBottom: '24px', fontSize: '0.95rem' }}>
                   {product.description}
                 </p>
-                <ul style={{ padding: 0, listStyle: 'none', color: 'var(--color-text-secondary)', fontSize: '0.9rem' }}>
+                <ul style={{ padding: 0, listStyle: 'none', color: 'var(--color-text-secondary)', fontSize: '0.85rem' }}>
                   <li style={{ marginBottom: '8px', display: 'flex', gap: '12px' }}>
                     <span style={{ fontWeight: '600', color: 'black' }}>Material:</span> Premium DARK Fabric
                   </li>
@@ -250,9 +268,16 @@ const ProductDetailPage = () => {
 
       <style>{`
         @media (max-width: 1024px) {
-          main { padding: 100px 24px !important; }
-          .grid { grid-template-columns: 1fr !important; }
-          img { height: 500px !important; }
+          .product-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .main-image-container { height: 600px !important; }
+          .product-title { font-size: 2.2rem !important; }
+          .product-price { font-size: 1.5rem !important; }
+        }
+        @media (max-width: 768px) {
+          main { padding: 120px 0 60px !important; }
+          .image-gallery { flex-direction: column !important; gap: 0 !important; }
+          .main-image-container { height: 450px !important; }
+          .product-info-container { position: relative !important; top: 0 !important; }
         }
         @keyframes spin {
           from { transform: rotate(0deg); }

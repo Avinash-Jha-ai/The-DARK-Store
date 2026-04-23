@@ -64,6 +64,9 @@ const CollectionBar = () => {
         .collection-bar::-webkit-scrollbar {
           display: none;
         }
+        @media (max-width: 768px) {
+          .collection-bar { padding: 12px 20px !important; margin-top: 56px !important; gap: 20px !important; }
+        }
       `}</style>
     </div>
   );

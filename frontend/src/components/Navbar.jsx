@@ -99,7 +99,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <Link to="/" style={{ fontFamily: 'var(--font-headline)', fontSize: '1.8rem', fontWeight: '700', letterSpacing: '0.2em' }}>
+        <Link to="/" className="logo-text" style={{ fontFamily: 'var(--font-headline)', fontSize: '1.8rem', fontWeight: '700', letterSpacing: '0.2em' }}>
           The DARK Store
         </Link>
 
@@ -161,7 +161,7 @@ const Navbar = () => {
 
           {user ? (
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: '600', letterSpacing: '0.05em' }}>{user.fullname.toUpperCase()}</span>
+              <span className="user-name" style={{ fontSize: '0.8rem', fontWeight: '600', letterSpacing: '0.05em' }}>{user.fullname.toUpperCase()}</span>
               <LogOut size={20} onClick={handleLogout} style={{ cursor: 'pointer', color: '#ef4444' }} />
             </div>
           ) : (
@@ -199,9 +199,15 @@ const Navbar = () => {
         </div>
 
         <style>{`
+          @media (max-width: 1024px) {
+            nav { padding: 16px 40px !important; }
+            .nav-links { gap: 24px !important; }
+          }
           @media (max-width: 768px) {
             .nav-links { display: none !important; }
-            nav { padding: 20px 24px !important; }
+            nav { padding: 16px 20px !important; }
+            .logo-text { font-size: 1.2rem !important; letter-spacing: 0.1em !important; }
+            .user-name { display: none !important; }
           }
         `}</style>
       </motion.nav>

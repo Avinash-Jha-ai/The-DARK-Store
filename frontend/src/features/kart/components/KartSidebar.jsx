@@ -159,7 +159,13 @@ const KartSidebar = ({ isOpen, onClose }) => {
               display: 'flex',
               flexDirection: 'column'
             }}
+            className="kart-sidebar"
           >
+            <style>{`
+              @media (max-width: 450px) {
+                .kart-sidebar { max-width: 100% !important; }
+              }
+            `}</style>
             {/* Header */}
             <div style={{
               padding: '30px',

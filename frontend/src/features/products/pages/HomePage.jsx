@@ -40,7 +40,7 @@ const HomePage = () => {
       <CollectionBar />
       
       {/* Hero Section */}
-      <section style={{ height: '100vh', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ height: '80vh', position: 'relative', overflow: 'hidden' }}>
         <motion.div 
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -57,11 +57,10 @@ const HomePage = () => {
         <div style={{ 
           position: 'absolute', 
           inset: 0, 
-          background: 'linear-gradient(to right, rgba(0,0,0,0.4), transparent)',
+          background: 'linear-gradient(to right, rgba(0,0,0,0.6), transparent)',
           display: 'flex',
           alignItems: 'center',
-          padding: '0 60px'
-        }}>
+        }} className="container">
           <div style={{ maxWidth: '600px', color: 'white' }}>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -72,6 +71,7 @@ const HomePage = () => {
               NEW SEASON 2026
             </motion.p>
             <motion.h1
+              className="hero-title"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.8 }}
@@ -107,10 +107,10 @@ const HomePage = () => {
       </section>
 
       {/* Featured Grid */}
-      <section style={{ padding: '120px 60px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '60px' }}>
+      <section className="container" style={{ padding: '120px 0' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '60px', flexWrap: 'wrap', gap: '20px' }}>
           <div>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '16px' }}>Curated Selections</h2>
+            <h2 className="section-title" style={{ fontSize: '2.5rem', marginBottom: '16px' }}>Curated Selections</h2>
             <p style={{ color: 'var(--color-text-secondary)', maxWidth: '400px' }}>
               Handpicked pieces from The DARK Store, designed for the discerning individual.
             </p>
@@ -120,7 +120,7 @@ const HomePage = () => {
           </Link>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '40px' }}>
+        <div className="grid-responsive">
           {productsLoading ? (
             Array(8).fill(0).map((_, i) => <ProductCardSkeleton key={i} />)
           ) : (
@@ -161,17 +161,18 @@ const HomePage = () => {
 
 
       {/* Editorial Section */}
-      <section style={{ backgroundColor: 'var(--color-on-background)', color: 'white', padding: '100px 60px', display: 'flex', gap: '80px', alignItems: 'center' }}>
+      <section className="editorial-section container" style={{ backgroundColor: 'var(--color-on-background)', color: 'white', padding: '100px 0', display: 'flex', gap: '80px', alignItems: 'center' }}>
         <motion.div 
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          style={{ flex: 1 }}
+          style={{ flex: 1, width: '100%' }}
         >
           <img 
             src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=80" 
             alt="Editorial" 
             style={{ width: '100%', height: '600px', objectFit: 'cover' }}
+            className="editorial-image"
           />
         </motion.div>
         <motion.div 
@@ -180,7 +181,7 @@ const HomePage = () => {
           viewport={{ once: true }}
           style={{ flex: 1 }}
         >
-          <h2 style={{ fontSize: '3rem', marginBottom: '24px' }}>The Digital <br/><span style={{ color: 'var(--color-gold)' }}>DARK Store Experience</span></h2>
+          <h2 className="editorial-title" style={{ fontSize: '3rem', marginBottom: '24px' }}>The Digital <br/><span style={{ color: 'var(--color-gold)' }}>DARK Store Experience</span></h2>
           <p style={{ fontSize: '1.1rem', lineHeight: '1.8', color: '#ccc', marginBottom: '40px' }}>
             We believe that clothing is more than just fabric. It is a dialogue between the wearer and the world. Our new collection explores the silence between threads, celebrating the minimal and the masterful.
           </p>
@@ -192,11 +193,14 @@ const HomePage = () => {
 
       <style>{`
         @media (max-width: 1024px) {
-          section { padding: 80px 24px !important; }
-          h1 { fontSize: 3.5rem !important; }
+          .hero-title { font-size: 3.5rem !important; }
+          .editorial-title { font-size: 2.5rem !important; }
         }
         @media (max-width: 768px) {
-          section { flex-direction: column !important; }
+          .hero-title { font-size: 2.5rem !important; }
+          .editorial-section { flex-direction: column !important; gap: 40px !important; }
+          .editorial-image { height: 400px !important; }
+          .section-title { font-size: 2rem !important; }
         }
       `}</style>
       <Footer />

@@ -34,13 +34,13 @@ const AllProductsPage = () => {
       <Navbar />
       <CollectionBar />
 
-      <section style={{ padding: '80px 60px 40px' }}>
+      <section className="container" style={{ padding: '80px 0 40px' }}>
         <motion.div
            initial={{ opacity: 0, y: 20 }}
            animate={{ opacity: 1, y: 0 }}
            transition={{ duration: 0.8 }}
         >
-          <h1 style={{ 
+          <h1 className="page-title" style={{ 
             fontSize: '3.5rem', 
             fontFamily: 'var(--font-headline)', 
             textTransform: 'uppercase',
@@ -58,8 +58,8 @@ const AllProductsPage = () => {
         </motion.div>
       </section>
 
-      <section style={{ padding: '40px 60px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '60px 40px' }}>
+      <section className="container" style={{ padding: '40px 0' }}>
+        <div className="grid-responsive">
           {isLoading ? (
             Array(12).fill(0).map((_, i) => <ProductCardSkeleton key={i} />)
           ) : displayedProducts.length > 0 ? (
@@ -116,6 +116,12 @@ const AllProductsPage = () => {
           </motion.div>
         )}
       </section>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .page-title { font-size: 2.2rem !important; }
+        }
+      `}</style>
 
 
       <style>{`

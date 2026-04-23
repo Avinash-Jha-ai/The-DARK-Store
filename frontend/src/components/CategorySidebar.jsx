@@ -94,7 +94,13 @@ const CategorySidebar = ({ isOpen, onClose }) => {
               display: 'flex',
               flexDirection: 'column'
             }}
+            className="category-sidebar"
           >
+            <style>{`
+              @media (max-width: 500px) {
+                .category-sidebar { max-width: 100% !important; }
+              }
+            `}</style>
             {/* Header */}
             <div style={{ padding: '24px 30px', display: 'flex', justifyContent: 'flex-end', borderBottom: '1px solid #f0f0f0' }}>
               <X size={24} onClick={onClose} style={{ cursor: 'pointer' }} />
