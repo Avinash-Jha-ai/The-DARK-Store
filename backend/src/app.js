@@ -19,6 +19,10 @@ app.use(cors({
     credentials: true
 }));
 
+app.get("/", (req, res) => {
+    res.json({ message: "Server is running..." });
+});
+
 app.use("/api/auth",authRouter);
 app.use("/api/product",productRouter);
 app.use("/api/kart",kartRouter);
