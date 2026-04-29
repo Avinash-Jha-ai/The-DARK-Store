@@ -104,10 +104,21 @@ const KartSidebar = ({ isOpen, onClose }) => {
         },
         theme: {
           color: "#000000"
+        },
+        modal: {
+          ondismiss: () => {
+            alert("Payment was cancelled by the user.");
+          }
         }
       };
 
       const paymentObject = new window.Razorpay(options);
+
+      paymentObject.on('payment.failed', function (response) {
+        console.error("Payment Failed:", response.error);
+        alert(`Payment failed: ${response.error.description}`);
+      });
+
       paymentObject.open();
 
     } catch (error) {

@@ -21,6 +21,13 @@ export const createOrder = async (req, res) => {
             });
         }
 
+        if (amount < 1) {
+            return res.status(400).json({
+                success: false,
+                message: "Minimum amount must be at least 1 INR (100 paise)",
+            });
+        }
+
         const options = {
             amount: amount * 100, // razorpay expects amount in paise
             currency: "INR",
@@ -70,6 +77,13 @@ export const verifyPayment = async (req, res) => {
             razorpay_signature,
             dbOrderId,
         } = req.body;
+
+        if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature || !dbOrderId) {
+            return res.status(400).json({
+                success: false,
+                message: "Missing required verification fields",
+            });
+        }
 
         console.log("Verification Data Received:", { razorpay_order_id, razorpay_payment_id, razorpay_signature, dbOrderId });
 
