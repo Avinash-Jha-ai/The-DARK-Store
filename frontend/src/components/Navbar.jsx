@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { ShoppingBag, User, Search, Menu, LogOut, X, Heart } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -21,6 +21,17 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
   const [isKartOpen, setIsKartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const rzpPaymentFormRef = useRef(null);
+
+  useEffect(() => {
+    if (rzpPaymentFormRef.current && rzpPaymentFormRef.current.children.length === 0) {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/payment-button.js';
+      script.setAttribute('data-payment_button_id', 'pl_SjMcCHzmcMQgAj');
+      script.async = true;
+      rzpPaymentFormRef.current.appendChild(script);
+    }
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -96,6 +107,7 @@ const Navbar = () => {
             <Link to="/">HOME</Link>
             <Link to="/products">PRODUCTS</Link>
             {user && <Link to="/my-orders">MY ORDERS</Link>}
+            <form ref={rzpPaymentFormRef}></form>
           </div>
         </div>
 
