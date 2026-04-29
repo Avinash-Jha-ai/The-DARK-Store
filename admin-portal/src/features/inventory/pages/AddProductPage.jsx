@@ -237,7 +237,6 @@ const AddProductPage = () => {
         }
       `}</style>
     </div>
-    </div>
   );
 };
 
