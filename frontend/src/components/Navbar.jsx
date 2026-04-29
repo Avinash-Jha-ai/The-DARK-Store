@@ -107,7 +107,6 @@ const Navbar = () => {
             <Link to="/">HOME</Link>
             <Link to="/products">PRODUCTS</Link>
             {user && <Link to="/my-orders">MY ORDERS</Link>}
-            <form ref={rzpPaymentFormRef}></form>
           </div>
         </div>
 
@@ -151,6 +150,9 @@ const Navbar = () => {
               <Search size={20} style={{ cursor: 'pointer' }} onClick={() => setIsSearchOpen(true)} />
             )}
           </AnimatePresence>
+
+          {/* Donation Button */}
+          <form ref={rzpPaymentFormRef} style={{ display: 'flex', alignItems: 'center' }}></form>
 
           {user && user.role === 'seller' && (
             <a
