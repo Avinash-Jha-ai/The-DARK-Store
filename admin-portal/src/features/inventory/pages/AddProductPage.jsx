@@ -4,6 +4,7 @@ import { createProduct, resetProductState } from '../../../store/adminProductSli
 import { motion } from 'framer-motion';
 import { Plus, Upload, X, Loader2, Check } from 'lucide-react';
 
+
 const AddProductPage = () => {
   const [formData, setFormData] = useState({
     title: '',
