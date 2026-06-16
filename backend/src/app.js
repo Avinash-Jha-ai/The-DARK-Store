@@ -2,6 +2,7 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import mongoose from "mongoose";
 import authRouter from "./routes/auth.route.js"
 import productRouter from "./routes/product.route.js"
 import kartRouter from "./routes/kart.route.js"
@@ -18,6 +19,8 @@ app.use(cors({
     origin: [
         "http://localhost:5173",
         "http://localhost:5174",
+        "https://the-dark-store.vercel.app",
+        "https://the-dark-store-bgxj.vercel.app",
         "https://the-dark-store-vedj.vercel.app"
     ],
     credentials: true
